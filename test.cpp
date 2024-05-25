@@ -1,14 +1,18 @@
 #include <iostream>
 #include <conio.h> //getch() use garna chainxa
 #include <stdlib.h>
+#include <string.h>
 #include <cstring>
+#include <cstdlib>
+int main();
 using namespace std;
 char arr[3][3];
 bool player = true;
-int posi;
+int posi, ok = 0;
 int a[9];
 char currentPlayer;
 int endState = 0;
+bool canIExit = false;
 char c;
 void location(int *x, int *y)
 {
@@ -20,7 +24,7 @@ void location(int *x, int *y)
              << "Enter the position from 0-9: ";
         while ((c = getch()) != 13) // input.length ley 1 block space rakhney vayo
         {
-            if (c >= 48 && c <= 57 && input.length() < 1 && input.length() !=1)
+            if (c >= 48 && c <= 57 && input.length() < 1 && input.length() != 1)
             {
                 input.push_back(c);
                 cout << c;
@@ -35,13 +39,14 @@ void location(int *x, int *y)
             }
             else if (c == 13)
             {
-                cout<<endl<<"!! Enter other enter string!! ";
+                cout << endl
+                     << "!! Enter other enter string!! ";
                 continue;
             }
         }
         posi = atoi(input.data());
-        c='\0';
-        input="\0";
+        c = '\0';
+        input = "\0";
         if (posi >= 1 && posi <= 9)
         {
             for (int i = 0; i < 9; i++)
@@ -145,53 +150,175 @@ char currentPlayer_Is()
 }
 void boxesOnly(int why)
 {
-        if(why==1)
-        {
+    if (why == 1)
+    {
         currentPlayer_Is(); // first time x or o chhose garna deko user lai
-        }
-        cout << endl
-             << endl;
-        cout << endl
-             << endl;
-        for (int i = 0; i < 3; i++)
+    }
+    cout << endl
+         << endl;
+    cout << endl
+         << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        cout << endl;
+        for (int j = 0; j < 3; j++)
         {
-            cout << endl;
-            for (int j = 0; j < 3; j++)
+            if (j == 1 || j == 2)
             {
-                if (j == 1 || j == 2)
-                {
-                    cout << " ";
-                    cout << arr[i][j] << " ";
-                }
-                else
-                {
-                    cout << "   ";
-                    cout << arr[i][j] << " ";
-                }
-                if (j == 2)
-                {
-                    cout << "  ";
-                }
-                else
-                {
-                    cout << "|";
-                }
+                cout << " ";
+                cout << arr[i][j] << " ";
             }
-            cout << endl;
-            cout << "   ";
-            for (int k = 0; k < 3; k++)
+            else
             {
-                if (i >= 2)
-                {
-                    break;
-                }
-                cout << "---";
+                cout << "   ";
+                cout << arr[i][j] << " ";
+            }
+            if (j == 2)
+            {
+                cout << "  ";
+            }
+            else
+            {
+                cout << "|";
             }
         }
+        cout << endl;
+        cout << "   ";
+        for (int k = 0; k < 3; k++)
+        {
+            if (i >= 2)
+            {
+                break;
+            }
+            cout << "---";
+        }
+    }
+}
+void check()
+{
+    if (arr[0][0] == arr[0][1] && arr[0][1] == arr[0][2]) // row chwck start
+    {
+        if (arr[0][0] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[0][0] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+        
+    }
+    else if (arr[1][0] == arr[1][1] && arr[1][1] == arr[1][2])
+    {
+        if (arr[1][0] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[1][0] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+    }
+    else if (arr[2][0] == arr[2][1] && arr[2][1] == arr[2][2])
+    {
+        if (arr[2][0] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[2][0] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        } /// row check end
+    }
+    else if (arr[0][0] == arr[1][0] && arr[1][0] == arr[2][0])
+    {
+        if (arr[0][0] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[0][0] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+    }
+    else if (arr[0][1] == arr[1][1] && arr[1][1] == arr[2][1])
+    {
+        if (arr[0][1] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[0][1] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+    }
+    else if (arr[0][2] == arr[1][2] && arr[1][2] == arr[2][2])
+    {
+        if (arr[0][2] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[0][2] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+    }
+    else if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2])
+    {
+        if (arr[0][0] == 'X')
+        {
+            cout << endl
+                 << "Player X Win" << endl;
+                 canIExit = true;
+        }
+        else if (arr[0][0] == 'O')
+        {
+            cout << endl
+                 << "Player O Win" << endl;
+                 canIExit = true;
+        }
+    }
+    else if (arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])
+    {
+        if (arr[0][2] == 'X')
+        {
+            cout << "Player X Win" << endl;
+            canIExit = true;
+        }
+        else if (arr[0][2] == 'O')
+        {
+            cout << "Player O Win" << endl;
+            canIExit = true;
+        }
+    }
 }
 void playMe(int firstTime)
 {
-     if (firstTime == 1)
+    if (firstTime == 1)
     {
         boxesOnly(1);
         playMe(0);
@@ -201,7 +328,7 @@ void playMe(int firstTime)
         int x = -1, y = -1;
         for (int i = 0; i < 3; i++) // position ma X or O ko position set garna khoj da yo rakhne ho
         {
-            location(&x, &y); //1-9 input lina use hunxa
+            location(&x, &y); // 1-9 input lina use hunxa
             if (firstTime == 0)
             {
                 system("cls");
@@ -222,14 +349,24 @@ void playMe(int firstTime)
         }
         endState++;
     }
-            boxesOnly(0); //yo chan pattern print garna ko lagi matrai ho wit X or O if any available
-    if (endState != 9) //yo chai 9 patak vanda badi input na lige game lai close garna lai ho
+    boxesOnly(0);      // yo chan pattern print garna ko lagi matrai ho wit X or O if any available
+    if (endState != 9) // yo chai 9 patak vanda badi input na lige game lai close garna lai ho
     {
+        check();
+        if (canIExit == true)
+        {
+            main();
+        }else{
         playMe(0);
+        }
     }
 }
 int main()
 {
-    playMe(1);
+    if (canIExit == false)
+    {
+        playMe(1);
+    }
     return 0;
+   // _getch();
 }
