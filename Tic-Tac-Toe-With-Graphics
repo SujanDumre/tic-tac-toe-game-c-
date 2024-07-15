@@ -3,10 +3,10 @@
 #include <raylib.h>
 #include <time.h>
 #include <math.h>
-Color Green = Color{38,185,154,255};
-Color Dark_Green = Color{ 20,160,133,255 };
-Color Light_Green = Color{ 129,204,184,255 };
-Color Light_White = Color { 255, 255, 247 };
+Color Green = Color{38, 185, 154, 255};
+Color Dark_Green = Color{20, 160, 133, 255};
+Color Light_Green = Color{129, 204, 184, 255};
+Color Light_White = Color{255, 255, 247};
 int main(int BORN);
 void canILiveThisWorld(int life);
 void loop();
@@ -20,9 +20,9 @@ const int cellHeight = screen_height / COL;
 int COUNT = 0, FLAG = 0, BORN = -1;
 bool whoamI, x;
 float a, b;
-int toggle[3][3] = { {0, 0, 0},
+int toggle[3][3] = {{0, 0, 0},
                     {0, 0, 0},
-                    {0, 0, 0} };
+                    {0, 0, 0}};
 Texture2D gameC, gameD;
 class clicked
 {
@@ -90,7 +90,7 @@ public:
                     }
                     else
                     {
-                        DrawTexture(gameD, (cellWidth)+55, (cellHeight / 2) - 55, BLUE);
+                        DrawTexture(gameD, (cellWidth) + 55, (cellHeight / 2) - 55, BLUE);
                         COUNT++;
                         toggle[0][1] = 2;
                         FLAG++;
@@ -133,14 +133,14 @@ public:
                     x = WhoseTurn();
                     if (x == true)
                     {
-                        DrawTexture(gameC, (cellWidth / 2) - 75, (cellHeight)+40, RED);
+                        DrawTexture(gameC, (cellWidth / 2) - 75, (cellHeight) + 40, RED);
                         COUNT++;
                         toggle[1][0] = 1;
                         FLAG++;
                     }
                     else
                     {
-                        DrawTexture(gameD, (cellWidth / 2) - 50, (cellHeight)+60, BLUE);
+                        DrawTexture(gameD, (cellWidth / 2) - 50, (cellHeight) + 60, BLUE);
                         COUNT++;
                         toggle[1][0] = 2;
                         FLAG++;
@@ -183,14 +183,14 @@ public:
                     x = WhoseTurn();
                     if (x == true)
                     {
-                        DrawTexture(gameC, (2 * cellWidth) + 35, (cellHeight)+35, RED);
+                        DrawTexture(gameC, (2 * cellWidth) + 35, (cellHeight) + 35, RED);
                         COUNT++;
                         toggle[1][2] = 1;
                         FLAG++;
                     }
                     else
                     {
-                        DrawTexture(gameD, (2 * cellWidth) + 55, (cellHeight)+55, BLUE);
+                        DrawTexture(gameD, (2 * cellWidth) + 55, (cellHeight) + 55, BLUE);
                         COUNT++;
                         toggle[1][2] = 2;
                         FLAG++;
@@ -464,8 +464,8 @@ int main(int Born)
     SetTargetFPS(144);
     gameC = LoadTexture("X.png");
     gameD = LoadTexture("O.png");
-    //ClearBackground(Light_Green);
-    //DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Light_Green);
+    // ClearBackground(Light_Green);
+    // DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Light_Green);
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -474,8 +474,8 @@ int main(int Born)
         {
             for (int j = 0; j < COL; j++)
             {
-                DrawRectangle(i * cellWidth - 20, j * cellHeight -20, 5, 600, Light_Green);
-                DrawRectangle(i * cellWidth - 20, j * cellHeight -20, 600, 5, Light_Green);
+                DrawRectangle(i * cellWidth - 20, j * cellHeight - 20, 5, 600, Light_Green);
+                DrawRectangle(i * cellWidth - 20, j * cellHeight - 20, 600, 5, Light_Green);
             }
         }
         a.printMyExistence();
