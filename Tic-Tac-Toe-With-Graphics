@@ -23,7 +23,7 @@ int ROW = 3;
 const int cellWidth = screen_width / ROW;
 const int cellHeight = screen_height / COL;
 int victoryTimer = 10;
-int COUNT = 0, FLAG = 0, BORN = -1;
+int COUNT = 0, FLAG = 0, BORN = 0;
 bool whoamI, x;
 float a, b;
 int toggle[3][3] = { {0, 0, 0},
@@ -335,14 +335,14 @@ public:
                 canILiveThisWorld(2);
             }
         }
-        else if (FLAG == 9)
+        else if (FLAG >= 9)
         {
-            canILiveThisWorld(9);
+            canILiveThisWorld(7);
         }
     }
     void canILiveThisWorld(int life)
     {
-        if (life == 1 && life != 2 && life != 9)
+        if (life == 1 && life != 2 && life != 7)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
             DrawText("Game Over! Player X Win", 40, 300, 50, VIOLET);
@@ -364,10 +364,10 @@ public:
                 exit(0);
             }
         }
-        else if (life == 2 && life != 1 && life != 9)
+        else if (life >= 7 && life != 1 && life != 2)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
-            DrawText("Game Over! Player O Win", 40, 300, 50, VIOLET);
+            DrawText("Match Draw! Nobody Win", 40, 300, 50, VIOLET);
             DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 0.1f));
             DrawText("Press R to restart or Press E to exit", 170, 390, 20, VIOLET);
             for (int i = 0; i < 3; i++)
@@ -386,10 +386,10 @@ public:
                 exit(0);
             }
         }
-        else if (life == 9 && life != 1 && life != 2)
+        else if (life == 2 && life != 1 && life != 7)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
-            DrawText("Match Draw! Nobody Win", 40, 300, 50, VIOLET);
+            DrawText("Game Over! Player O Win!!!", 40, 300, 50, VIOLET);
             DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 0.1f));
             DrawText("Press R to restart or Press E to exit", 170, 390, 20, VIOLET);
             for (int i = 0; i < 3; i++)
