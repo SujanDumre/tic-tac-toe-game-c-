@@ -1,3 +1,8 @@
+// Game.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+// TICTACTOEGRAPHICSADDED.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #include <iostream>
 #include <raylib.h>
@@ -134,7 +139,7 @@ public:
             } // 11
             else if (a > cellWidth && b < 2 * cellHeight && a < 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
             {
-                if (toggle[1][1] != 1 || toggle[1][1] != 2)
+                if (toggle[1][1] != 1 && toggle[1][1] != 2)
                 {
                     x = WhoseTurn();
                     if (x == true)
@@ -337,7 +342,7 @@ public:
     }
     void canILiveThisWorld(int life)
     {
-        if (life == 1)
+        if (life == 1 && life != 2 && life != 9)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
             DrawText("Game Over! Player X Win", 40, 300, 50, VIOLET);
@@ -359,7 +364,7 @@ public:
                 exit(0);
             }
         }
-        else if (life == 2)
+        else if (life == 2 && life != 1 && life != 9)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
             DrawText("Game Over! Player O Win", 40, 300, 50, VIOLET);
@@ -381,7 +386,7 @@ public:
                 exit(0);
             }
         }
-        else if (life == 9)
+        else if (life == 9 && life != 1 && life != 2)
         {
             DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.1f));
             DrawText("Match Draw! Nobody Win", 40, 300, 50, VIOLET);
@@ -448,3 +453,25 @@ int main(int Born)
     }
     return 0;
 }
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started:
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
