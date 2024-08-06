@@ -1,4 +1,3 @@
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #include <iostream>
 #include <raylib.h>
 #include <time.h>
@@ -7,9 +6,8 @@ Color Green = Color{ 38,185,154,255 };
 Color Dark_Green = Color{ 20,160,133,255 };
 Color Light_Green = Color{ 129,204,184,255 };
 Color Light_White = Color{ 255, 255, 247 };
-int main(int BORN);
-void canILiveThisWorld(int life);
-void loop();
+void canILiveThisWorld(int);
+int main(int);
 using namespace std;
 const int screen_width = 700;
 const int screen_height = 700;
@@ -22,7 +20,7 @@ int COUNT = 0, FLAG = 0, BORN = 0;
 bool whoamI, x;
 float a, b;
 void IamMain(int);
-
+int iloop = 0;
 int toggle[3][3] = { {0, 0, 0},
 					{0, 0, 0},
 					{0, 0, 0} };
@@ -46,12 +44,12 @@ public:
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 
-			a = GetMouseX();
-			b = GetMouseY();
+			a = float(GetMouseX());
+			b = float(GetMouseY());
 			// 00
 			if (a < cellWidth && b < cellHeight && a < 2 * cellWidth && a < 3 * cellWidth)
 			{
-				if (toggle[0][0] != 1 && toggle[0][0] != 2)
+				if (toggle[0][0] != 1 && toggle[0][0] != 2 && toggle[0][0] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -73,7 +71,7 @@ public:
 			} // 01
 			else if (a < 2 * cellWidth && b < cellHeight && a > cellWidth && a < 3 * cellWidth)
 			{
-				if (toggle[0][1] != 1 && toggle[0][1] != 2)
+				if (toggle[0][1] != 1 && toggle[0][1] != 2 && toggle[0][1] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -94,7 +92,7 @@ public:
 			} // 02
 			else if (a < 3 * cellWidth && b < cellHeight && a > cellWidth && a > 2 * cellWidth)
 			{
-				if (toggle[0][2] != 1 && toggle[0][2] != 2)
+				if (toggle[0][2] != 1 && toggle[0][2] != 2 && toggle[0][2] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -115,7 +113,7 @@ public:
 			} // 2nd row start //10
 			else if (a < cellWidth && b < 2 * cellHeight && a < 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[1][0] != 1 && toggle[1][0] != 2)
+				if (toggle[1][0] != 1 && toggle[1][0] != 2 && toggle[1][0] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -136,7 +134,7 @@ public:
 			} // 11
 			else if (a > cellWidth && b < 2 * cellHeight && a < 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[1][1] != 1 && toggle[1][1] != 2)
+				if (toggle[1][1] != 1 && toggle[1][1] != 2 && toggle[1][1] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -157,7 +155,7 @@ public:
 			} // 12
 			else if (a > cellWidth && b < 2 * cellHeight && a > 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[1][2] != 1 && toggle[1][2] != 2)
+				if (toggle[1][2] != 1 && toggle[1][2] != 2 && toggle[1][2] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -178,7 +176,7 @@ public:
 			} // 3rd row start 20
 			else if (a < cellWidth && b > 2 * cellHeight && a < 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[2][0] != 1 && toggle[2][0] != 2)
+				if (toggle[2][0] != 1 && toggle[2][0] != 2 && toggle[2][0] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -199,7 +197,7 @@ public:
 			} // 21
 			else if (a > cellWidth && b > 2 * cellHeight && a < 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[2][1] != 1 && toggle[2][1] != 2)
+				if (toggle[2][1] != 1 && toggle[2][1] != 2 && toggle[2][1] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -220,7 +218,7 @@ public:
 			} // 22
 			else if (a > cellWidth && b > 2 * cellHeight && a > 2 * cellWidth && a < 3 * cellWidth && b > cellHeight && b < 3 * cellHeight)
 			{
-				if (toggle[2][2] != 1 && toggle[2][2] != 2)
+				if (toggle[2][2] != 1 && toggle[2][2] != 2 && toggle[2][2] != 5)
 				{
 					x = WhoseTurn();
 					if (x == true)
@@ -265,17 +263,6 @@ public:
 				canILiveThisWorld(2);
 			}
 		}
-		else if (toggle[2][0] == toggle[2][1] && toggle[2][1] == toggle[2][2])
-		{
-			if (toggle[2][0] == 1)
-			{
-				canILiveThisWorld(1);
-			}
-			else if (toggle[2][0] == 2)
-			{
-				canILiveThisWorld(2);
-			} /// row check end
-		}
 		else if (toggle[0][0] == toggle[1][0] && toggle[1][0] == toggle[2][0])
 		{
 			if (toggle[0][0] == 1)
@@ -287,7 +274,7 @@ public:
 				canILiveThisWorld(2);
 			}
 		}
-		else if (toggle[0][1] == toggle[1][1] && toggle[1][1] == toggle[2][1])
+		if (toggle[0][1] == toggle[1][1] && toggle[1][1] == toggle[2][1])
 		{
 			if (toggle[0][1] == 1)
 			{
@@ -332,9 +319,20 @@ public:
 				canILiveThisWorld(2);
 			}
 		}
+		if (toggle[2][0] == toggle[2][1] && toggle[2][1] == toggle[2][2])
+		{
+			if (toggle[2][0] == 1)
+			{
+				canILiveThisWorld(1);
+			}
+			else if (toggle[2][0] == 2)
+			{
+				canILiveThisWorld(2);
+			} /// row check end
+		}
 		if (FLAG >= 9)
 		{
-			canILiveThisWorld(7);
+			canILiveThisWorld(5);
 		}
 	}
 	void canILiveThisWorld(int life)
@@ -342,69 +340,48 @@ public:
 
 		if (life == 1)
 		{
-			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 5.0f));
 			DrawText("Game Over! Player X Win", 40, 300, 50, VIOLET);
-			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 5.0f));
 			DrawText("Press R to restart or Press E to exit", 170, 390, 20, VIOLET);
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					toggle[i][j] = 1;
+					toggle[i][j] = 5;
 				}
 			}
-			if (IsKeyPressed(KEY_R))
-			{
-				main(1);
-			}
-			if (IsKeyPressed(KEY_E))
-			{
-				exit(0);
-			}
+			FLAG = -1; //TO STOP FLAG >= CONDITION TO EXECUTE
 		}
 		else if (life == 2)
 		{
-			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 5.0f));
 			DrawText("Game Over! Player O Win!!!", 40, 300, 50, VIOLET);
-			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 5.0f));
 			DrawText("Press R to restart or Press E to exit", 170, 390, 20, VIOLET);
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					toggle[i][j] = 2;
+					toggle[i][j] = 5;
 				}
 			}
-			if (IsKeyPressed(KEY_R))
-			{
-				main(1);
-			}
-			if (IsKeyPressed(KEY_C))
-			{
-				exit(0);
-			}
+			FLAG = -1;
 		}
-		else
+		else if (life == 5)
 		{
-			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 290, GetScreenWidth(), 60, Fade(RAYWHITE, 5.0f));
 			DrawText("Match Draw! Nobody Win", 40, 300, 50, VIOLET);
-			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 0.9f));
+			DrawRectangle(0, 385, GetScreenWidth(), 30, Fade(RAYWHITE, 5.0f));
 			DrawText("Press R to restart or Press E to exit", 170, 390, 20, VIOLET);
 			for (int i = 0; i < 3; i++)
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					toggle[i][j] = 2;
+					toggle[i][j] = 5;
 				}
 			}
-			if (IsKeyPressed(KEY_R))
-			{
-				main(1);
-			}
-			if (IsKeyPressed(KEY_E))
-			{
-				exit(0);
-			}
+			FLAG = -1;
 		}
 
 	}
@@ -413,11 +390,11 @@ int main(int Born = 0)
 {
 	InitWindow(screen_width, screen_height, "TIC TAC TOE GAME");
 	SetTargetFPS(144);
+	UnloadTexture(gameC);
+	UnloadTexture(gameD);
 	IamMain(Born);
 	return 0;
 }
-
-
 void IamMain(int Born = 0)
 {
 	clicked a;
@@ -438,11 +415,10 @@ void IamMain(int Born = 0)
 	}
 	int Xpos = GetMouseX();
 	int Yposi = GetMouseY();
+	gameC = LoadTexture("X.png");
+	gameD = LoadTexture("O.png");
 	while (!WindowShouldClose())
 	{
-		gameC = LoadTexture("X.png");
-		gameD = LoadTexture("O.png");
-
 		BeginDrawing();
 		for (int i = 0; i < ROW; i++)
 		{
@@ -455,7 +431,19 @@ void IamMain(int Born = 0)
 		a.printMyExistence();
 		a.check();
 		EndDrawing();
-		UnloadTexture(gameC);
-		UnloadTexture(gameD);
+		if (FLAG == -1)
+		{
+			if (IsKeyPressed(KEY_R))
+			{
+				main(1);
+			}
+			if (IsKeyPressed(KEY_E))
+			{
+				exit(0);
+			}
+		}
 	}
+	UnloadTexture(gameC);
+	UnloadTexture(gameD);
+	CloseWindow();
 }
